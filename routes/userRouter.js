@@ -1,12 +1,12 @@
 const Router = require('express')
 const router = new Router()
+const userController = require('../controllers/userController')
+const authMiddleware = require('../middleware/authMiddleware')
 
 
-router.get('/auth', (req, res) => {
-    res.json({message: "User is working"})
-})
-router.post('/registration')
-router.post('/login')
 
+router.post('/registration', userController.registration)
+router.post('/login', userController.login)
+router.get('/auth', authMiddleware, userController.check)
 
 module.exports = router
